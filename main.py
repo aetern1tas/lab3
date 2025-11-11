@@ -12,7 +12,7 @@ root.configure(bg='#1a1a1a')
 
 
 main_frame = tk.Frame(root, bg='#1a1a1a')
-main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+main_frame.pack(fill=tk.BOTH, expand=True)
 
 
 title_label = tk.Label(
@@ -25,14 +25,14 @@ title_label = tk.Label(
 title_label.pack(pady=20)
 
 
-image_frame = tk.Frame(main_frame, bg='#1a1a1a')
+image_frame = tk.Frame(main_frame)
 image_frame.pack(pady=10)
 
 image = Image.open("ELDEN_RING.jpg")
 image = image.resize((400, 200))
 photo = ImageTk.PhotoImage(image)
 
-image_label = tk.Label(image_frame, image=photo, bg='#1a1a1a')
+image_label = tk.Label(image_frame, image=photo)
 image_label.image = photo
 image_label.pack()
 
@@ -59,9 +59,7 @@ key_entry = tk.Entry(
     justify='center',
     state='readonly',
     bg='#2d2d2d',
-    fg='#d4af37',
-    relief='flat',
-    bd=2
+    fg='#d4af37'
 )
 key_entry.pack(pady=10)
 
@@ -80,9 +78,7 @@ def generate_key():
     
     full_key = '-'.join(key_parts)
     key_var.set(full_key)
-    
-    generate_btn.configure(bg='#f0c050')
-    root.after(200, lambda: generate_btn.configure(bg='#d4af37'))
+     
 
 def copy_to_clipboard():
     key = key_var.get()
@@ -90,9 +86,6 @@ def copy_to_clipboard():
         root.clipboard_clear()
         root.clipboard_append(key)
         root.update()
-        
-        copy_btn.configure(text="СКОПИРОВАНО!", bg='#4CAF50')
-        root.after(1000, lambda: copy_btn.configure(text="КОПИРОВАТЬ", bg="#ef3b65"))
         
         messagebox.showinfo("Успех", "Ключ скопирован в буфер обмена!")
     else:
@@ -106,8 +99,6 @@ generate_btn = tk.Button(
     bg='#d4af37',
     fg='black',
     command=generate_key,
-    relief='raised',
-    bd=3,
     padx=20,
     pady=10
 )
@@ -118,10 +109,9 @@ copy_btn = tk.Button(
     main_frame,
     text="КОПИРОВАТЬ",
     font=('Arial', 10),
-    bg="#010000",
-    fg='white',
+    bg="#000000",
+    fg="#00FFA2",
     command=copy_to_clipboard,
-    relief='flat',
     padx=15,
     pady=5
 )
